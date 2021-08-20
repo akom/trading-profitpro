@@ -1,2 +1,4 @@
 # trading-profitpro
-Strategies for Trading
+##Strategies for Trading
+### Screening
+- Rafi

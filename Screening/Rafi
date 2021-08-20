@@ -1,0 +1,10 @@
+// Filter for Screenning using the Indicator Rafi.
+// by akom
+var
+  vRafi : Float;
+begin
+
+  vRafi := Rafi;  
+  if ((vRafi[1] < 2.45) and (vRafi[0] >= 2.45)) then Select;
+
+end;
