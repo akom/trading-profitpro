@@ -1,0 +1,25 @@
+input
+  precoAbertura(Open);
+  PrecoFechamento(Close);
+  Periodo(10);
+var
+  tamanhoCandle : float;
+  agrecao       : float;
+  i             : integer;                                 
+begin
+  tamanhoCandle := 0;
+  for i := 1 to Periodo do
+    begin
+      tamanhoCandle := Abs(precoAbertura[i] - PrecoFechamento[i]) + tamanhoCandle;
+    end;
+    agrecao := 2 * ( tamanhoCandle/9);
+  plot(agrecao);
+  if ((precoAbertura[0] - PrecoFechamento[0] >= agrecao) AND
+   (Sign(precoAbertura[0] - PrecoFechamento[0]) = 1 )) then
+    PaintBar(clRed);
+  end
+  if ((Abs(precoAbertura[0] - PrecoFechamento[0]) >= agrecao) AND
+   (Sign(precoAbertura[0] - PrecoFechamento[0]) = -1 )) then
+    PaintBar(clGreen);
+  end
+end;
