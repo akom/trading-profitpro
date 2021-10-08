@@ -1,25 +1,42 @@
+// Indicador de Agressão.
+// Método Ichimoku Livro Comprar e Vender, Eduardo Matsura.
+// Indicador é definida pela comparação do tamanho do corpo do candle atual em relação à média dos últimos nove candles multiplicado por 2.
+// Na cor verde, a agressão é de compra.
+// Na cor vermelha, a agressão é de venda.
+//
+// Desenvolvido por: Adolfo Kurt Olguin Mostajo.
+// email: adokurt@gmail.com
+
 input
-  precoAbertura(Open);
-  PrecoFechamento(Close);
-  Periodo(10);
+
+  precoAbertura(Open);    // Obtem o valor da abertura do candle
+  PrecoFechamento(Close); // Obtem o valor do fechamento do candle
+  Periodo(9);             // Número de periodos para medir o tamanho dos candles.
 var
   tamanhoCandle : float;
-  agrecao       : float;
-  i             : integer;                                 
+  agressao      : float;
+  i             : integer;
 begin
+
   tamanhoCandle := 0;
+
+  //Soma dos 9 ultimos corpos dos candles
   for i := 1 to Periodo do
     begin
       tamanhoCandle := Abs(precoAbertura[i] - PrecoFechamento[i]) + tamanhoCandle;
     end;
-    agrecao := 2 * ( tamanhoCandle/9);
-  plot(agrecao);
-  if ((precoAbertura[0] - PrecoFechamento[0] >= agrecao) AND
-   (Sign(precoAbertura[0] - PrecoFechamento[0]) = 1 )) then
-    PaintBar(clRed);
-  end
-  if ((Abs(precoAbertura[0] - PrecoFechamento[0]) >= agrecao) AND
-   (Sign(precoAbertura[0] - PrecoFechamento[0]) = -1 )) then
-    PaintBar(clGreen);
-  end
+
+  // Calculo da agressao
+  agressao := round(2 * (tamanhoCandle / 9)); 
+
+  //Verificamos se o corpo é maior à agressao e se o signo de ele é negativo indica compra. 
+  if (Abs(precoAbertura[0] - PrecoFechamento[0]) > agressao) AND (Sign(precoAbertura[0] - PrecoFechamento[0]) = - 1) then
+    begin
+      PaintBar(clGreen);
+    end
+  //Verificamos se o corpo é maior à agressao e se o signo de ele é negativo indica compra. 
+  else if (Abs(precoAbertura[0] - PrecoFechamento[0]) > agressao) AND (Sign(precoAbertura[0] - PrecoFechamento[0]) = 1) then
+    begin
+      PaintBar(clRed);
+    end;
 end;
