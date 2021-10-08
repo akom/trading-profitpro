@@ -1,4 +1,7 @@
 # trading-profitpro
-##Strategies for Trading
+##Estrategias para ProfitPro
+
+### Indicador
+- Agressao Ichimoku.
 ### Screening
-- Rafi
+- Rafi.
