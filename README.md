@@ -1,5 +1,5 @@
 # trading-profitpro
-##Estrategias para ProfitPro
+## Estrategias para ProfitPro
 
 ### Indicador
 - Agressao Ichimoku.
